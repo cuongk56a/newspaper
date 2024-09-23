@@ -25,13 +25,12 @@ function ChangePassword() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const access_token = localStorage.getItem("access_token");
-      if (!access_token) {
+      if (!user) {
         nav("/login");
         return;
       }
       try {
-        const response = await getDetailUser(access_token, {
+        const response = await getDetailUser({
           user_id: user.currentUser.user_id,
         });
         setUserDetail(response);
@@ -79,10 +78,8 @@ function ChangePassword() {
         toast.error("Mật khẩu mới và mật khẩu nhập lại phải giống nhau");
         return;
       }
-      const access_token = user.access_token;
       try {
         await changePassword(
-          access_token,
           {
             old_password: data.old_password,
             new_password: data.new_password,

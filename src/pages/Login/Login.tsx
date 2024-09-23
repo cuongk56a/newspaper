@@ -230,7 +230,6 @@ const Login = () => {
           </div>
         </div>
       </section>
-
       <Modal
         open={showModal}
         onOk={handleOk}

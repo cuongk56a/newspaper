@@ -1,16 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Markdown from "react-markdown";
 import { Tag } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { getPosts } from "../../config/api/post.api.ts";
+import {
+  getPosts,
+  getPostsByCategory,
+  getPostsBySearch,
+} from "../../config/api/post.api.ts";
 import { timeAgo } from "../../utils/timeAgo.ts";
 import { PostModel } from "../../models/Post.ts";
+import urlImage from "../../assets/images/not-found-page.jpg";
 
 const MainContent = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const search = location.search;
   const [showGoToTop, setShowGoToTop] = useState(false);
   const [buttonStyle, setButtonStyle] = useState(false);
   const [dataPost, setDataPost] = useState<PostModel[]>([]);
+  const [urlNext, setUrlNext] = useState<string | null>(null);
+  const loadMoreRef = useRef<HTMLButtonElement | null>(null);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -30,73 +40,129 @@ const MainContent = () => {
 
   useEffect(() => {
     const fetchPost = async () => {
-      const dataPost = await getPosts();
-      setDataPost(dataPost.results);
+      let posts = [];
+      if (id) {
+        posts = await getPostsByCategory(id);
+      } else if (search) {
+        posts = await getPostsBySearch(decodeURIComponent(search));
+      } else {
+        posts = await getPosts();
+      }
+      if (!!posts.results) {
+        setDataPost(posts.results);
+        setUrlNext(posts.next);
+      } else {
+        setDataPost([]);
+        setUrlNext(null);
+      }
     };
     fetchPost();
-  }, []);
+  }, [id || search]);
+
+  useEffect(() => {
+    const loadMore = async () => {
+      if (urlNext) {
+        const posts = await fetch(urlNext).then((res) => res.json());
+        if (posts.results.length > 0) {
+          setDataPost((prevDataPost) => [...prevDataPost, ...posts.results]);
+          setUrlNext(posts.next);
+        }
+      }
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMore();
+      }
+    });
+
+    if (loadMoreRef.current) {
+      observer.observe(loadMoreRef.current);
+    }
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [urlNext]);
 
   const handleScroll = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   return (
     <div>
-      <div>
-        {dataPost.slice(0, 20).map((data: any, index: number) => (
-          <div
-            key={index}
-            className="flex w-full h-[200px] gap-4 p-4 border-b-2 border-dashed"
-          >
+      {dataPost.length <= 0 && !!search ? (
+        <div
+          className="flex items-center justify-center w-[600px] h-[600px] bg-cover bg-center m-auto"
+          style={{
+            backgroundImage: `url(${urlImage})`,
+          }}
+        ></div>
+      ) : (
+        <div>
+          {dataPost.map((data: any, index: number) => (
             <div
-              className="w-[40%] cursor-pointer"
-              onClick={() => {
-                nav(`/post-detail/${data.id}`);
-              }}
+              key={index}
+              className="flex w-full h-[200px] gap-4 p-4 border-b-2 border-dashed"
             >
-              <img
-                src={data?.thumbnail}
-                alt={data?.title}
-                className="h-full w-full object-cover rounded"
-              />
-            </div>
-            <div className="w-full flex flex-col relative">
-              <h1
-                className="text-[25px] font-medium line-clamp-1 cursor-pointer"
+              <div
+                className="w-[40%] cursor-pointer"
                 onClick={() => {
                   nav(`/post-detail/${data.id}`);
                 }}
               >
-                {data?.title}
-              </h1>
-              <Markdown className="text-[18px] line-clamp-3">
-                {data?.summary}
-              </Markdown>
-              <div className="flex justify-between text-[15px] mt-2 absolute bottom-0 w-full">
-                <p className="text-left">
-                  <span>Tag: </span>
-                  {data.keywords
-                    .slice(0, 4)
-                    .map(
-                      (
-                        item: { id: string; keyword: string },
-                        indexTag: any
-                      ) => (
-                        <Tag
-                          key={indexTag}
-                          className="bg-gray-300 cursor-pointer"
-                        >
-                          {item.keyword}
-                        </Tag>
-                      )
-                    )}
-                </p>
-                <p className="text-right">{timeAgo(data.publish_date)}</p>
+                <img
+                  src={data?.thumbnail}
+                  alt={data?.title}
+                  className="h-full w-full object-cover rounded"
+                />
+              </div>
+              <div className="w-full flex flex-col relative">
+                <h1
+                  className="text-[25px] font-medium line-clamp-1 cursor-pointer"
+                  onClick={() => {
+                    nav(`/post-detail/${data.id}`);
+                  }}
+                >
+                  {data?.title}
+                </h1>
+                <Markdown className="text-[18px] line-clamp-3">
+                  {data?.summary}
+                </Markdown>
+                <div className="flex justify-between text-[15px] mt-2 absolute bottom-0 w-full">
+                  <p className="text-left">
+                    <span>Tag: </span>
+                    {data.keywords
+                      .slice(0, 4)
+                      .map(
+                        (
+                          item: { id: string; keyword: string },
+                          indexTag: any
+                        ) => (
+                          <Tag
+                            key={indexTag}
+                            className="bg-gray-300 cursor-pointer"
+                            onClick={()=>{nav(`/search/?search=${item.keyword}`)}}
+                          >
+                            {item.keyword}
+                          </Tag>
+                        )
+                      )}
+                  </p>
+                  <p className="text-right">{timeAgo(data.publish_date)}</p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+          {urlNext && dataPost.length <= 100 && (
+            <button ref={loadMoreRef} className="load-more-button">
+              Load More
+            </button>
+          )}
+        </div>
+      )}
+
       {showGoToTop && (
         <button
           className={`fixed right-20 p-3 bg-red-500 text-white rounded-full shadow-lg ${

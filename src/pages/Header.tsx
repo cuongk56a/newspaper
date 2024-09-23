@@ -9,6 +9,7 @@ import { logoutSuccess } from "../redux/features/authSlice";
 const Header = () => {
   const nav = useNavigate();
   const [showDropDown, setShowDropDown] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useSelector((store: any) => store.auth.currentUser);
   const dispatch = useDispatch()
@@ -23,6 +24,16 @@ const Header = () => {
       !dropdownRef.current.contains(event.target)
     ) {
       setShowDropDown(false);
+    }
+  };
+
+  const handleInputChange = (event:any) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleKeyDown = (event:any) => {
+    if (event.key === 'Enter') {
+      nav(`/search?search=${searchTerm}`)
     }
   };
 
@@ -47,11 +58,16 @@ const Header = () => {
       <div className="flex items-center border border-white rounded-lg bg-white">
         <input
           type="text"
+          name="search"
           placeholder="Tìm kiếm tiêu đề"
           className="h-[30px] w-[400px] pl-3 pr-10 text-gray-800 placeholder-gray-500 rounded-l-lg"
+          value={searchTerm}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+
         />{" "}
         <button className="h-[30px] w-[40px] flex items-center justify-center bg-red-500 text-white rounded-r-lg hover:bg-red-700">
-          <Icon icon="material-symbols:search" className="w-[20px] h-[20px]" />
+          <Icon icon="material-symbols:search" className="w-[20px] h-[20px]" onClick={()=>{nav(`/search?search=${searchTerm}`)}}/>
         </button>
       </div>{" "}
       {user ? (

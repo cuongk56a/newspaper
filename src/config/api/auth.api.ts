@@ -26,8 +26,6 @@ export const loginUser = async (
       localStorage.setItem("refresh_token", refresh_token);
       navigate("/");
       return response.data;
-    }else{
-      return;
     }
   } catch (error) {
     dispatch(loginFailed());
@@ -51,10 +49,12 @@ export const registerUser = async (
 
   try {
     const response = await axios_client.post(`${_API_.AUTH}/register/`, data);
-    toast.success("Đăng ký thành công");
-    dispatch(registerSuccess(response.data));
-    navigate("/login");
-    return response.data;
+    if(response.status == 201){
+      dispatch(registerSuccess(response.data));
+      toast.success("Đăng ký thành công");
+      navigate("/login");
+      return response.data;
+    }
   } catch (error) {
     dispatch(registerFailed());
     toast.error("Có lỗi xảy ra khi đăng ký");

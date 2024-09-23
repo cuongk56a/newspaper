@@ -5,19 +5,14 @@ import axios_client from "../axios";
 import { toast } from "react-toastify";
 // import { refreshToken } from './auth.api';
 
-export const changePassword = async (
-  access_token: string,
-  data: { old_password: string; new_password: string }
-) => {
+export const changePassword = async (data: {
+  old_password: string;
+  new_password: string;
+}) => {
   try {
     const response = await axios_client.patch(
       `${_API_.USER}/change-password/`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
+      data
     );
 
     if (response.status == 200) {
@@ -31,16 +26,9 @@ export const changePassword = async (
   }
 };
 
-export const getDetailUser = async (
-  access_token: string,
-  data: { user_id: string }
-) => {
+export const getDetailUser = async (data: { user_id: string }) => {
   try {
-    const response = await axios_client.get(`${_API_.USER}/${data.user_id}`, {
-      headers: {
-        Authorization: `Bearer ${access_token}`,
-      },
-    });
+    const response = await axios_client.get(`${_API_.USER}/${data.user_id}/`);
     if (response.status == 200) {
       return response.data;
     }
@@ -50,7 +38,6 @@ export const getDetailUser = async (
 };
 
 export const updateAvatar = async (
-  access_token: string,
   data: { avatar: any },
   dispatch: any,
   user: UserModel
@@ -61,7 +48,6 @@ export const updateAvatar = async (
       data,
       {
         headers: {
-          Authorization: `Bearer ${access_token}`,
           "Content-Type": "multipart/form-data",
         },
       }
@@ -71,7 +57,7 @@ export const updateAvatar = async (
       "user",
       JSON.stringify({ ...user, avatar: response.data.avatar_link })
     );
-    toast.success('Cập nhật avatar thành công!')
+    toast.success("Cập nhật avatar thành công!");
     return response.data;
   } catch (error) {
     toast.error("Có lỗi xảy ra khi cập nhật avatar!");
@@ -80,7 +66,6 @@ export const updateAvatar = async (
 };
 
 export const updateUser = async (
-  access_token: string,
   data: {
     user_id: string;
     full_name: string;
@@ -89,17 +74,12 @@ export const updateUser = async (
     birthday: string;
   },
   dispatch: any,
-  user: UserModel
+  user?: UserModel
 ) => {
   try {
     const response = await axios_client.patch(
       `${_API_.USER}/${data.user_id}/`,
-      data,
-      {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      }
+      data
     );
     dispatch(updateUserSuccess({ ...user, ...response.data }));
     localStorage.setItem("user", JSON.stringify({ ...user, ...response.data }));

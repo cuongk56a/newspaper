@@ -4,7 +4,7 @@ import { ComponentPropsWithoutRef } from "react";
 
 const Footer = () => {
   return (
-    <footer className="w-full h-auto pt-8 border-t-2 mt-4">
+    <footer className="w-full h-auto pt-8 border-t-2 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-center md:h-[80px] px-4 md:px-8 gap-20">
         <div className="w-full md:w-[15%] flex justify-center items-center md:mb-0 bg-red-500">
           <img

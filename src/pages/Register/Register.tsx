@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../config/api/auth.api";
 import { toast } from "react-toastify";
+import { FormHelperText } from "@mui/material";
 
 const Register = () => {
   const nav = useNavigate();
@@ -35,11 +36,11 @@ const Register = () => {
     full_name: Yup.string().max(100).required("Họ tên không được để trống"),
     email: Yup.string()
       .email("Định dạng email k chính xác!")
-      .max(255)
+      .max(100)
       .required("Email không được để trống"),
     phone: Yup.string().max(11).min(10),
-    password: Yup.string().max(255).required("Mật khẩu không được để trống"),
-    cf_password: Yup.string().max(255).required("Mật khẩu không được để trống"),
+    password: Yup.string().max(30).required("Mật khẩu không được để trống"),
+    cf_password: Yup.string().max(30).required("Mật khẩu không được để trống"),
   });
 
   const formik = useFormik({
@@ -54,7 +55,7 @@ const Register = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (data) => {
-      if (data.cf_password != data.password) {
+       if (data.cf_password != data.password) {
         toast.error("Mật khẩu và mật khẩu nhập lại không chính xác");
       } else {
         const {full_name,email, phone, password, birthday} = data;
@@ -118,6 +119,11 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                   />
+                  {formik.touched.full_name && formik.errors.full_name && (
+                    <FormHelperText error id={`standard-weight-helper-text-full_name`}>
+                      {formik.errors.full_name}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
@@ -133,6 +139,11 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                   />
+                  {formik.touched.email && formik.errors.email && (
+                    <FormHelperText error id={`standard-weight-helper-text-email`}>
+                      {formik.errors.email}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div>
                   <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
@@ -147,6 +158,11 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                   />
+                  {formik.touched.phone && formik.errors.phone && (
+                    <FormHelperText error id={`standard-weight-helper-text-phone`}>
+                      {formik.errors.phone}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div className="relative">
                   <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
@@ -172,6 +188,11 @@ const Register = () => {
                       className="w-5 h-5"
                     />
                   </button>
+                  {formik.touched.password && formik.errors.password && (
+                    <FormHelperText error id={`standard-weight-helper-text-password`}>
+                      {formik.errors.password}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div className="relative">
                   <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
@@ -197,6 +218,11 @@ const Register = () => {
                       className="w-5 h-5"
                     />
                   </button>
+                  {formik.touched.cf_password && formik.errors.cf_password && (
+                    <FormHelperText error id={`standard-weight-helper-text-cf_password`}>
+                      {formik.errors.cf_password}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div className="pb-8">
                   <label className="block mb-2 text-base font-medium text-gray-900 dark:text-white">
@@ -210,6 +236,11 @@ const Register = () => {
                     onBlur={formik.handleBlur}
                     onChange={formik.handleChange}
                   />
+                  {formik.touched.birthday && formik.errors.birthday && (
+                    <FormHelperText error id={`standard-weight-helper-text-birthday`}>
+                      {formik.errors.birthday}
+                    </FormHelperText>
+                  )}
                 </div>
                 <div className="flex items-center gap-4 ">
                   <div className="border-t-2 w-full"></div>

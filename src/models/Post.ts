@@ -1,3 +1,6 @@
+import { Category } from "./Category";
+import { UserModel } from "./User";
+
 export enum STATUS_TYPE {
   DRAFT = "DRAFT",
   PUBLISHED = "PUBLISHED",
@@ -9,9 +12,14 @@ export interface PostModel {
   title: string
   slug: string
   thumbnail: string
-  category: any
+  category: Category
   source: Source
   likes: number
+  liked_by:{
+    id: string,
+    full_name: string,
+    avatar: string,
+  }[]
   summary: string
   author: string
   publish_date: string
@@ -19,8 +27,8 @@ export interface PostModel {
   contents: Content[]
   keywords: Keyword[]
   views: number
-  user: any
-  description: any
+  user: UserModel
+  description: string
 }
 
 export interface Source {

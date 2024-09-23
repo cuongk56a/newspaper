@@ -1,4 +1,3 @@
-import { Pagination } from "antd";
 import MainContent from "../Home/MainContent";
 
 const MainContainCategory = () => {
@@ -8,9 +7,6 @@ const MainContainCategory = () => {
       <div className="w-full">
         <div>
           <MainContent />
-        </div>
-        <div className="flex justify-center items-center pt-4">
-          <Pagination defaultCurrent={1} total={50} />;
         </div>
       </div>
       <div className="w-[35%] h-full"></div>

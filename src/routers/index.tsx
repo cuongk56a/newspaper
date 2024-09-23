@@ -8,6 +8,8 @@ import Category from "../pages/Category/Category";
 import IndexPost from "../pages/Post/Index";
 import UserDetail from "../pages/User/UserDetail";
 import ChangePassword from "../pages/User/ChangePassword";
+import Search from "../pages/Post/Search/Search";
+import PageError from "../pages/PageError";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/category",
+    path: "/category/:id",
     element: <Category />,
   },
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
     path: "/change-password",
     element: <ChangePassword/>,
   },
+  {
+    path: "/search",
+    element: <Search />,
+  },
+  {
+    path: '/*',
+    element: <PageError />,
+},
 ]);
 
 export default router;

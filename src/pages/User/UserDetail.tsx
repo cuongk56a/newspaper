@@ -21,13 +21,12 @@ const UserDetail = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const access_token = localStorage.getItem("access_token");
-      if (!access_token) {
+      if (!user) {
         nav("/login");
         return;
       }
       try {
-        const response = await getDetailUser(access_token, {
+        const response = await getDetailUser({
           user_id: user.currentUser.user_id,
         });
         setUserDetail(response);
@@ -63,10 +62,8 @@ const UserDetail = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (data) => {
-      const access_token = user.access_token;
       try {
         await updateUser(
-          access_token,
           {
             user_id: user.currentUser.user_id,
             full_name: data.full_name,
@@ -94,7 +91,7 @@ const UserDetail = () => {
         toast.error('Cập nhật avatar thất bại')
         return;
       }
-      await updateAvatar(access_token,{avatar:file},dispatch, user.currentUser);
+      await updateAvatar({avatar:file},dispatch, user.currentUser);
     }
   };
 

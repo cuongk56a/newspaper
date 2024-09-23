@@ -16,31 +16,10 @@ const RightContent = () => {
         </div>
         <div className="w-[65%]">
           <h1 className="font-medium line-clamp-1 text-[25px] cursor-pointer"  onClick={()=>{nav('/post-detail')}}>
-            Tiếp Bình Định trên sân nhà, Hà Nội FC quyết tâm giành trọn 3 điểm
-            trong trận ra quân tại LPBank V-League 2024/25.\nDù vậy, đội chủ nhà
-            gặp rất nhiều khó khăn trước hàng phòng ngự được tổ chức tốt của đối
-            thủ.\nHà Nội FC gặp bế tắc trong phần lớn thời gian của trận
-            đấu.\nCác tân binh của Hà Nội FC thích nghi nhanh nhưng vẫn chưa thể
-            hiện tốt như kỳ vọng.\nTrong một thế trận bế tắc, Văn Quyết là điểm
-            sáng của đội chủ sân Hàng Đẫy.\nThủ quân Hà Nội FC thi đấu rất nỗ
-            lực, có mặt ở những điểm "nóng" trên sân.\nPhút 83, đón đường chuyền
-            của đồng đội, Văn Quyết tung cú dứt điểm từ ngoài vòng cấm, bóng đi
-            chìm đánh bại Tuấn Linh.\nVăn Quyết ghi bàn thắng duy nhất của trận
-            đấu.\nAnh khẳng định giá trị của mình ngay trận đầu tại V-League
-            2024/25.\nĐây là trận đấu mà HLV Kim Sang Sik dự khán. Tuyển Việt
-            Nam đang rất khát tiền đạo giỏi, và liệu chiến lược gia người Hàn
-            Quốc có trao cơ hội cho Văn Quyết trong đợt tập trung vào tháng 10
-            tới?\nSau trận đấu, HLV Quang Huy của Bình Định cho rằng trọng tài
-            đã không dùng VAR để kiểm tra tình huống mà Văn Quyết ghi bàn. Theo
-            HLV này, trước đó cầu thủ Hà Nội FC có tình huống phạm lỗi với cầu
-            thủ Bình Định.
+            Bạn nữ xinh gái được tuyển chọn làm mẫu tiêu đề đầu báo newspaper!
           </h1>
-          <p className="text-[15px] line-clamp-3 pt-2">
-            Tuy nhiên, nhiều phóng viên có mặt tại Ukraine khẳng định đã thấy
-            nhiều tù nhân chiến tranh Nga được đưa lên một chiếc xe buýt gần
-            biên giới Ukraine - Belarus một lúc trước khi đoàn tù nhân Ukraine
-            băng qua biên giới về nước. Từ khi Ukraine mở cuộc tiến công Nga đến
-            nay, đây là vụ trao đổi tù nhân thứ hai giữa hai nước
+          <p className="text-[15px] line-clamp-4 pt-2">
+          Vy là một cô gái xinh đẹp và thông minh, luôn toả ra một sức hút đặc biệt. Nụ cười rạng rỡ và ánh mắt sáng của cô khiến mọi người xung quanh cảm thấy ấm áp và gần gũi. Vy không chỉ chăm chỉ học tập mà còn rất nhiệt tình trong các hoạt động xã hội, luôn sẵn sàng giúp đỡ bạn bè và cộng đồng. Sự kiên trì và đam mê của Vy trong mọi lĩnh vực khiến mọi người không thể không ngưỡng mộ. Cô ấy thực sự là một tấm gương sáng để mọi người noi theo.
           </p>
         </div>
       </div>

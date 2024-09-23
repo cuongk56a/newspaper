@@ -1,25 +1,26 @@
 import { useNavigate } from "react-router-dom";
-
-const categorys = [
-  'Thời Sự',
-  'Pháp Luật',
-  'Kinh Doanh',
-  'Công Nghệ',
-  'Đời Sống',
-  'Y Tế',
-  'Thể Thao',
-  'Du Lịch',
-  'Giải Trí'
-]
+import { Category } from "../models/Category";
+import { useEffect, useState } from "react";
+import { getCategory } from "../config/api/category.api";
 
 const MainNav = () => {
+  const [categories, setCategories] = useState<Category[]>([])
+
+  useEffect(()=>{
+    const fetchCategory = async() => {
+      const dataCategories = await getCategory()
+      setCategories(dataCategories.results)
+    }
+    fetchCategory()
+  },[])
+
   const nav = useNavigate();
   return (
     <div className="bg-white border-b-2 h-[40px] w-full items-center flex justify-evenly shadow-md">
-      {categorys.map((category:string, index:number)=>{
+      {categories.map((category:Category, index:number)=>{
         return (
-          <div key={index}>
-            <a className="text-[12px] font-bold uppercase cursor-pointer" onClick={()=>{nav( `/category`)}}>{category}</a>
+          <div key={index} onClick={()=>{nav(`/category/${category.id}`)}}>
+            <a className="text-[12px] font-bold uppercase cursor-pointer" onClick={()=>{nav( `/category`)}}>{category.title}</a>
           </div>
         )
       })}

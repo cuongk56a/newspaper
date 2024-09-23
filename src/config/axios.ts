@@ -1,13 +1,13 @@
-// import { useUserStore } from "@pages/authenticate/state";
 import axios from "axios";
 import queryString from "query-string";
 import { handleResponseError } from "./api/auth.api";
+import { _API_ } from "./api.contains";
 // import { unstable_batchedUpdates } from "react-dom";
+
 
 // Khởi tạo axios client với baseURL và cấu hình các thông số mặc định
 const axios_client = axios.create({
-  // baseURL: import.meta.env.VITE_API_URL,
-  baseURL: "http://127.0.0.1:8000/api/v1",
+  baseURL: _API_.BASE_URL,
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
@@ -21,6 +21,7 @@ axios_client.interceptors.request.use(
     if (access_token) {
       config.headers.Authorization = "Bearer " + access_token;
     }
+    config.headers['Content-Type'] ="application/json";
 
     return config;
   },
@@ -36,9 +37,9 @@ axios_client.interceptors.response.use(
     return response;
   },
   function (error) {
+    // return Promise.reject(error);
     handleResponseError(error)
   }
-  // handleResponseError
 );
 
 // Xuất đối tượng axios_client
