@@ -16,7 +16,7 @@ const MainNav = () => {
 
   const nav = useNavigate();
   return (
-    <div className="bg-white border-b-2 h-[40px] w-full items-center flex justify-evenly shadow-md">
+    <div className="bg-white border-b-2 h-[40px] w-full items-center justify-evenly shadow-md hidden lg:flex text-center">
       {categories.map((category:Category, index:number)=>{
         return (
           <div key={index} onClick={()=>{nav(`/category/${category.id}`)}}>

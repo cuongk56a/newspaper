@@ -63,23 +63,23 @@ const DetailPost = () => {
 
   return (
     <div className="flex w-full h-auto pt-4 text-justify">
-      <div className="w-[35%] h-full"></div>
+      <div className="sm:w-[10%] h-full lg:w-[30%]"></div>
       <div className="container mx-auto p-4">
-        <div className="text-gray-600 flex justify-between">
-          <span className="text-[18px] font-bold leading-[22px]">
+        <div className="text-gray-600 flex justify-between mx-4 lg:mx-auto">
+          <span className="text-[12px] sm:text-[15px] lg:text-[18px] font-bold leading-[22px]">
             {detailPost?.category?.title}
           </span>
-          <span className="text-[15px] leading-[18px] text-[#656565]">
+          <span className="text-[12px] sm:text-[15px] leading-[18px] text-[#656565]">
             {formmatPublishTime(detailPost?.publish_date)}
           </span>
         </div>
         <div className="border-b-2 border-dashed">
-          <h1 className="text-[36px] leading-[46px] font-bold mt-8 mb-4 ">
+          <h1 className="text-[18px] sm:text-[25px] lg:text-[36px] leading-[30px] sm:leading-[40px] lg:leading-[46px] font-bold mt-4 sm:mt-8 mb-2 sm:mb-4 ">
             {detailPost?.title}
           </h1>
         </div>
         <div className="mt-4 mb-6">
-          <h2 className="font-bold text-[18px] leading-[30px]">
+          <h2 className="font-bold text-[13px] sm:text-[15px] lg:text-[18px] leading-[20px] sm:leading-[30px]">
             {detailPost?.summary}
           </h2>
         </div>
@@ -97,7 +97,7 @@ const DetailPost = () => {
                         key={pIndex}
                         className={`${
                           para.below_img ? "mb-8" : "mb-4"
-                        } text-[16px]`}
+                        } text-[13px] lg:text-[16px]`}
                       >
                         {para.text}
                       </p>
@@ -107,7 +107,7 @@ const DetailPost = () => {
                       key={pIndex}
                       className={`${
                         para.below_img ? "mb-8" : "mb-4"
-                      } text-[16px]`}
+                      } text-[14px] lg:text-[16px]`}
                     >
                       {para.text}
                     </p>
@@ -117,7 +117,7 @@ const DetailPost = () => {
                   <img
                     src={section.image}
                     alt={section.description_img}
-                    className="w-full h-[650px] mb-4 object-fill"
+                    className="w-full h-[250px] sm:h-[450px] lg:h-[550px] mb-4 object-fill"
                   />
                   <span>{section.description_img}</span>
                 </div>
@@ -125,14 +125,14 @@ const DetailPost = () => {
             </div>
           ))}
         </div>
-        <div className="text-[16px]">
-          <div className="flex items-center gap-2 py-4">
+        <div className="text-[13px] sm:text-[16px]">
+          <div className="flex items-center gap-2 py-2">
             <strong>Lượt yêu thích: </strong>
             <div
               className="flex items-center gap-1 bg-gray-300 w-auto h-full rounded-md px-2"
               onClick={handClickLike}
             >
-              {detailPost &&
+              {user &&
               detailPost?.liked_by.some((u: any) => u.id == user.user_id) ? (
                 <Icon
                   icon="ion:heart-sharp"
@@ -152,7 +152,7 @@ const DetailPost = () => {
             </div>
           </div>
           <p className="mb-4">
-            <strong>Nguồn:</strong>
+            <strong className="">Nguồn:</strong>
             <a href={detailPost?.source?.domain}>
               "{detailPost?.source?.domain}"
             </a>
@@ -169,7 +169,7 @@ const DetailPost = () => {
           </p>
         </div>
       </div>
-      <div className="w-[35%] h-full"></div>
+      <div className="sm:w-[10%] h-full lg:w-[30%]"></div>
       {showGoToTop && (
         <button
           className={`fixed right-20 p-3 bg-red-500 text-white rounded-full shadow-lg ${

@@ -6,11 +6,17 @@ import MainNav from "./MainNav";
 function Index() {
   return (
     <>
-      <div className="flex flex-col min-h-screen">
-        <Header />
-        <MainNav />
-        <Main />
-        <Footer />
+      <div className="flex flex-col min-h-screen content-wraapper mx-auto w-full">
+        <header>
+          <Header />
+          <MainNav />
+        </header>
+        <main>
+          <Main />
+        </main>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     </>
   );
