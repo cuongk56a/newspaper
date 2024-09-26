@@ -72,7 +72,9 @@ export const refreshToken = async (data: { refresh: string }) => {
     return response.data.access_token;
   } catch (error) {
     console.error("Token refresh failed:", error);
-    localStorage.clear();
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user');
     window.location.pathname;
     throw error;
   }
