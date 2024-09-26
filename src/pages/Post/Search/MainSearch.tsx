@@ -9,8 +9,8 @@ const MainSearch = () => {
     <div className="flex w-full h-auto pt-4">
       <div className="w-[35%] h-full"></div>
       <div className="w-full">
-        <div className="py-4">
-          <p className="text-2xl font-medium">Từ khoá tìm kiếm: <span className=" font-normal">{decodeURIComponent(search)}</span></p>
+        <div className="p-4">
+          <p className="text-xl sm:text-2xl font-medium">Từ khoá tìm kiếm: <span className=" font-normal">{decodeURIComponent(search)}</span></p>
         </div>
         <div>
           <MainContent />

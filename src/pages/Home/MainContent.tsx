@@ -93,12 +93,14 @@ const MainContent = () => {
   return (
     <div>
       {dataPost.length <= 0 && !!search ? (
-        <div
-          className="flex items-center justify-center w-[600px] h-[600px] bg-cover bg-center m-auto"
-          style={{
-            backgroundImage: `url(${urlImage})`,
-          }}
-        ></div>
+          <div className="w-full h-[490px] sm:w-full sm:h-[610px] lg:h-[620px]">
+            <div
+              className="flex items-center justify-center w-[350px] h-[450px] sm:w-[600px] sm:h-[600px] bg-cover bg-center m-auto"
+              style={{
+                backgroundImage: `url(${urlImage})`,
+              }}
+            ></div>
+          </div>  
       ) : (
         <div>
           {dataPost.map((data: any, index: number) => (

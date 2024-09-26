@@ -80,7 +80,7 @@ const Header = () => {
               >
                 <div className="flex flex-col w-full rounded-t-md mt-2">
                   <p className="pl-2 text-2xl font-semibold">TÌM KIẾM</p>
-                  <div className="flex gap-4 mt-2 bg-white w-[90%] mx-auto rounded-md mb-2 justify-center items-center">
+                  <div className="flex gap-4 mt-2 bg-white text-gray-700 w-[90%] mx-auto rounded-md mb-2 justify-center items-center">
                     <input
                       type="text"
                       name="search"
