@@ -267,7 +267,7 @@ const Register = () => {
                   Bạn đã có tài khoản?{" "}
                   <a
                     // href="#"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500 pl-1"
+                    className="font-medium text-primary-600 hover:underline dark:text-primary-500 pl-1 cursor-pointer"
                     onClick={() => {
                       nav("/login");
                     }}

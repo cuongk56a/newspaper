@@ -194,7 +194,7 @@ const Login = () => {
                         />
                       </div>
                       <div className="ml-3 text-base">
-                        <label className="text-black dark:text-gray-300">
+                        <label className="text-black dark:text-gray-300 cursor-pointer">
                           Ghi nhớ đăng nhập
                         </label>
                       </div>
@@ -202,7 +202,7 @@ const Login = () => {
                     <a
                       href="#"
                       type="button"
-                      className="text-base font-medium text-primary-600 hover:underline dark:text-primary-500"
+                      className="text-base font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer"
                       onClick={handleShowModal}
                     >
                       Quên mật khẩu?
@@ -218,7 +218,7 @@ const Login = () => {
                     Bạn chưa có tài khoản?{" "}
                     <a
                       // href="#"
-                      className="font-medium text-primary-600 hover:underline dark:text-primary-500 pl-1"
+                      className="font-medium text-primary-600 hover:underline dark:text-primary-500 pl-1 cursor-pointer"
                       onClick={() => {
                         nav("/register");
                       }}

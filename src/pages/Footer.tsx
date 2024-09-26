@@ -5,15 +5,15 @@ import { ComponentPropsWithoutRef } from "react";
 const Footer = () => {
   return (
     <div className="w-full h-auto pt-2 sm:pt-8 border-t-2 mt-2">
-      <div className="flex flex-col sm:flex-row justify-between items-center lg:h-[80px] px-4 md:px-8 gap-4 sm:gap-10">
-        <div className="w-full sm:w-[15%] flex justify-center items-center md:mb-0">
+      <div className="flex flex-col sm:flex-row justify-between items-center lg:h-[80px] px-4 md:px-8 gap-4 sm:gap-5 lg:gap-10">
+        <div className="w-full sm:w-[30%] lg:w-[15%] flex justify-center items-center md:mb-0">
           <img
             src={urlImage}
             alt="logo"
             className="w-[90%] h-[120px] lg:h-[100px] object-fill rounded"
           />
         </div>
-        <div className="w-full md:w-[50%] text-left">
+        <div className="w-full sm:w-[35%] lg:w-[50%] text-left">
           <p className="text-lg font-semibold mb-2">
             Địa chỉ: Km10, Đường Nguyễn Trãi, Q.Hà Đông, Hà Nội
           </p>
@@ -38,7 +38,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="w-full sm:w-[35%] text-center">
+        <div className="w-full sm:w-[35%] lg:w-[35%] text-center">
           <div className="flex flex-col items-center justify-between">
             <p className="text-2xl font-semibold mb-4">
               Đăng ký email - Mở cổng thông tin
