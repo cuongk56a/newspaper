@@ -67,7 +67,7 @@ const Login = () => {
 
   return (
     <>
-      <section className="relative flex items-center justify-center">
+      <section className="relative mx-auto my-auto">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -81,7 +81,7 @@ const Login = () => {
             backgroundPosition: "center", // Căn giữa hình ảnh
           }}
         ></div>
-        <div className="my-auto">
+        <div className="">
           <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
             <a
               // href="/"
