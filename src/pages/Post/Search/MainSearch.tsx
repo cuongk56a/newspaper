@@ -6,7 +6,7 @@ const MainSearch = () => {
   const search = location.search.slice(8)
   
   return (
-    <div className="flex w-full h-auto pt-4">
+    <div className="flex w-full h-auto pt-4 min-h-[550px] sm:min-h-[665px] lg:min-h-[680px]">
       <div className="w-[35%] h-full"></div>
       <div className="w-full">
         <div className="p-4">

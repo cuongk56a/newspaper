@@ -93,6 +93,7 @@ const MainContent = () => {
   return (
     <div>
       {dataPost.length <= 0 && !!search ? (
+        <>
           <div className="w-full h-[490px] sm:w-full sm:h-[610px] lg:h-[620px]">
             <div
               className="flex items-center justify-center w-[350px] h-[450px] sm:w-[600px] sm:h-[600px] bg-cover bg-center m-auto"
@@ -100,103 +101,100 @@ const MainContent = () => {
                 backgroundImage: `url(${urlImage})`,
               }}
             ></div>
-          </div>  
+          </div>{" "}
+        </>
       ) : (
-        <div>
-          {dataPost.map((data: any, index: number) => (
-            <>
-              <div
-                key={index}
-                className="hidden sm:flex w-full h-[200px] gap-4 p-4 border-b-2 border-dashed"
-              >
-                <div
-                  className="w-[40%] cursor-pointer"
-                  onClick={() => {
-                    nav(`/post-detail/${data.id}`);
-                  }}
-                >
-                  <img
-                    src={data?.thumbnail}
-                    alt={data?.title}
-                    className="h-full w-full object-cover rounded"
-                  />
-                </div>
-                <div className="w-full flex flex-col relative">
-                  <h1
-                    className="text-[25px] font-medium line-clamp-1 cursor-pointer"
+        <>
+          <div>
+            {dataPost.map((data: any, index: number) => (
+              <div key={index}>
+                <div className="hidden sm:flex w-full h-[200px] gap-4 p-4 border-b-2 border-dashed">
+                  <div
+                    className="w-[40%] cursor-pointer"
                     onClick={() => {
                       nav(`/post-detail/${data.id}`);
                     }}
                   >
-                    {data?.title}
-                  </h1>
-                  <Markdown className="text-[18px] line-clamp-3">
-                    {data?.summary}
-                  </Markdown>
-                  <div className="flex justify-between text-[15px] mt-2 absolute bottom-0 w-full">
-                    <p className="text-left">
-                      <span>Tag: </span>
-                      {data.keywords
-                        .slice(0, 4)
-                        .map(
-                          (
-                            item: { id: string; keyword: string },
-                            indexTag: any
-                          ) => (
-                            <Tag
-                              key={indexTag}
-                              className="bg-gray-300 cursor-pointer"
-                              onClick={() => {
-                                nav(`/search/?search=${item.keyword}`);
-                              }}
-                            >
-                              {item.keyword}
-                            </Tag>
-                          )
-                        )}
-                    </p>
-                    <p className="text-right">{timeAgo(data.publish_date)}</p>
+                    <img
+                      src={data?.thumbnail}
+                      alt={data?.title}
+                      className="h-full w-full object-cover rounded"
+                    />
+                  </div>
+                  <div className="w-full flex flex-col relative">
+                    <h1
+                      className="text-[25px] font-medium line-clamp-1 cursor-pointer"
+                      onClick={() => {
+                        nav(`/post-detail/${data.id}`);
+                      }}
+                    >
+                      {data?.title}
+                    </h1>
+                    <Markdown className="text-[18px] line-clamp-3">
+                      {data?.summary}
+                    </Markdown>
+                    <div className="flex justify-between text-[15px] mt-2 absolute bottom-0 w-full">
+                      <p className="text-left">
+                        <span>Tag: </span>
+                        {data.keywords
+                          .slice(0, 4)
+                          .map(
+                            (
+                              item: { id: string; keyword: string },
+                              indexTag: any
+                            ) => (
+                              <Tag
+                                key={indexTag}
+                                className="bg-gray-300 cursor-pointer"
+                                onClick={() => {
+                                  nav(`/search/?search=${item.keyword}`);
+                                }}
+                              >
+                                {item.keyword}
+                              </Tag>
+                            )
+                          )}
+                      </p>
+                      <p className="text-right">{timeAgo(data.publish_date)}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:hidden w-full h-[350px] gap-4 px-4 border-b-2 border-dashed">
+                  <div className="w-full flex flex-col pt-2">
+                    <h1
+                      className="text-[15px] sm:text-[25px] font-medium line-clamp-1 cursor-pointer"
+                      onClick={() => {
+                        nav(`/post-detail/${data.id}`);
+                      }}
+                    >
+                      {data?.title}
+                    </h1>
+                    <Markdown className="text-[14px] sm:text-[18px] line-clamp-3 h-[63px]">
+                      {data?.summary}
+                    </Markdown>
+                  </div>
+                  <div
+                    className="w-full h-[236px] cursor-pointer"
+                    onClick={() => {
+                      nav(`/post-detail/${data.id}`);
+                    }}
+                  >
+                    <img
+                      src={data?.thumbnail}
+                      alt={data?.title}
+                      className="h-full w-full object-cover rounded"
+                    />
                   </div>
                 </div>
               </div>
-              <div
-                key={index}
-                className="flex flex-col sm:hidden w-full h-[350px] gap-4 px-4 border-b-2 border-dashed"
-              >
-                <div className="w-full flex flex-col pt-2">
-                  <h1
-                    className="text-[15px] sm:text-[25px] font-medium line-clamp-1 cursor-pointer"
-                    onClick={() => {
-                      nav(`/post-detail/${data.id}`);
-                    }}
-                  >
-                    {data?.title}
-                  </h1>
-                  <Markdown className="text-[14px] sm:text-[18px] line-clamp-3 h-[63px]">
-                    {data?.summary}
-                  </Markdown>
-                </div>
-                <div
-                  className="w-full h-[236px] cursor-pointer"
-                  onClick={() => {
-                    nav(`/post-detail/${data.id}`);
-                  }}
-                >
-                  <img
-                    src={data?.thumbnail}
-                    alt={data?.title}
-                    className="h-full w-full object-cover rounded"
-                  />
-                </div>
-              </div>
-            </>
-          ))}
-          {urlNext && dataPost.length <= 100 && (
-            <button ref={loadMoreRef} className="load-more-button">
-              Load More
-            </button>
-          )}
-        </div>
+            ))}
+            {urlNext && dataPost.length <= 100 && (
+              <button ref={loadMoreRef} className="load-more-button">
+                {/* Load More */}
+              </button>
+            )}
+          </div>
+        </>
       )}
 
       {showGoToTop && (
